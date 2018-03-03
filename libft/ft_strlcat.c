@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/20 07:28:28 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 00:57:11 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+size_t	ft_strlcat(char *dst, const char *src, size_t nt)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	size_t	nd;
+	int		i;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	i = 0;
+	while (dst[i] != '\0' && i < (int)nt)
+		i++;
+	nd = i;
+	while (src[i - nd] != '\0' && i < (int)nt - 1)
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
+		dst[i] = src[i - nd];
+		i++;
 	}
-	close(fd);
-	return (lst);
+	if (nd < nt)
+		dst[i] = '\0';
+	return (nd + ft_strlen(src));
 }

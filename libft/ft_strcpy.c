@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/19 19:50:22 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 00:05:02 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	int i;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	i = 0;
+	while (*(src + i) != '\0')
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
+		*(dst + i) = *(src + i);
+		i++;
 	}
-	close(fd);
-	return (lst);
+	dst[i] = '\0';
+	return (dst);
 }

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_n.c                                            :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 12:52:41 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/01 12:53:04 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/20 20:42:21 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 00:22:30 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list	*lst_n(char c)
+void	*ft_memalloc(size_t size)
 {
-	t_list	*new;
+	void *p;
 
-	if (!(new = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	new->c = c;
-	new->next = (NULL);
-	return (new);
+	p = malloc(size);
+	if (p != NULL)
+		ft_memset(p, 0, size);
+	return (p);
 }

@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/19 19:07:33 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 22:51:48 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	int				i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	i = 0;
+	while (i < (int)n)
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
+		if (*c1 - *c2 != 0)
+			return (*c1 - *c2);
+		c1++;
+		c2++;
+		i++;
 	}
-	close(fd);
-	return (lst);
+	return (0);
 }

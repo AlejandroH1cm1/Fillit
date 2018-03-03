@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/20 21:44:14 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 22:44:17 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+char	*ft_strmapi(char *s, char (*f)(unsigned int, char))
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	char	*r;
+	int		i;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	if (!s || !f)
+		return (0);
+	i = 0;
+	r = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (r != NULL)
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
+		while (*s != '\0')
 		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
+			r[i] = (*f)(i, *s);
+			s++;
+			i++;
 		}
-		tmp = tmp->next;
+		r[i] = '\0';
 	}
-	close(fd);
-	return (lst);
+	return (r);
 }

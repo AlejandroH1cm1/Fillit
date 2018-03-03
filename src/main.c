@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 15:00:27 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/01 17:08:42 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/02 19:23:16 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_list	*r_m(char *fi)
 
 static void		usage(void)
 {
-	write(1, "OwO What's this?\n", 17);
+	write(1, "usage: fillit file\n", 19);
 	return ;
 }
 
@@ -39,8 +39,15 @@ int				main(int ac, char **av)
 	}
 	read = r_m(av[1]);
 	if (!(minos = validate(read)))
-		write(1, "Error\n", 6);
+		write(1, "error\n", 6);
 	else
-		solve(minos);
+	{
+		if (!solve(minos))
+			write(1, "error\n", 6);
+		destroy_ar(minos, (1 + count_m(read)) / 21);
+		free(minos);
+	}
+	if (read)
+		lst_destroy(&read);
 	return (0);
 }

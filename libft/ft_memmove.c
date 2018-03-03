@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/19 18:12:52 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 00:11:35 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	unsigned char	*c1;
+	unsigned char	*c2;
+	int				i;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
-	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
-	}
-	close(fd);
-	return (lst);
+	c2 = (unsigned char *)dst;
+	c1 = (unsigned char *)src;
+	i = -1;
+	if (c1 < c2)
+		while ((int)(--n) >= 0)
+			c2[n] = c1[n];
+	else
+		while (++i < (int)n)
+			c2[i] = c1[i];
+	return (c2);
 }

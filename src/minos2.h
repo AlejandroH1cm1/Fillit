@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   minos2.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/03/02 00:49:01 by aherrera          #+#    #+#             */
+/*   Updated: 2018/03/02 02:58:31 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#ifndef MINOS2_H
+# define MINOS2_H
 
-t_list		*r_fi(char *fi)
+t_mino2 g_mino2[] =
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	{3, 12, 13},
+	{12, 22, 32},
+	{3, 4, 5},
+	{3, 12, 11},
+	{12, 13, 23},
+	{3, 13, 14},
+	{12, 11, 21},
+	{12, 13, 14},
+	{3, 12, 22},
+	{3, 4, 14},
+	{12, 22, 21},
+	{12, 11, 10},
+	{12, 22, 23},
+	{3, 4, 12},
+	{3, 13, 23},
+	{11, 12, 13},
+	{12, 13, 22},
+	{3, 4, 13},
+	{12, 11, 22}
+};
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
-	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
-	}
-	close(fd);
-	return (lst);
-}
+#endif

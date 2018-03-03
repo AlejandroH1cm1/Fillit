@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:56:33 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/01 17:25:25 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/02 03:38:10 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,21 @@ typedef struct		s_mino
 	int				(*m)(char *mino);
 }					t_mino;
 
+typedef struct		s_mino2
+{
+	int				num1;
+	int				num2;
+	int				num3;
+}					t_mino2;
+
 t_list				*r_fi(char *fi);
 t_list				*lst_n(char c);
 int					lst_a(t_list *l, char c);
 char				**validate(t_list *lst);
-void				solve(char **minos);
+int					solve(char **minos);
 void				destroy_ar(char **ar, int i);
-
+int					count_m(t_list *lst);
+void				lst_destroy(t_list **lst);
 int					mino_0(char *mino);
 int					mino_1(char *mino);
 int					mino_2(char *mino);

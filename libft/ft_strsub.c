@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/21 18:16:00 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 22:43:50 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	unsigned int	i;
+	char			*r;
 
-	if (!(lst = lst_n(0)))
-		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	if (!s)
+		return (0);
+	i = 0;
+	r = (char *)malloc((len - i + 1) * sizeof(char));
+	if (r != NULL)
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
+		while (i < (unsigned int)len)
 		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
+			r[i] = s[start + i];
+			i++;
 		}
-		tmp = tmp->next;
+		r[i] = '\0';
 	}
-	close(fd);
-	return (lst);
+	return (r);
 }

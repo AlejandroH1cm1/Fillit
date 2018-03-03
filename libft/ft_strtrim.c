@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_fi.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 13:58:05 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/02 03:37:26 by aherrera         ###   ########.fr       */
+/*   Created: 2018/02/21 22:04:29 by aherrera          #+#    #+#             */
+/*   Updated: 2018/02/23 22:43:19 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "liba.h"
+#include "libft.h"
 
-t_list		*r_fi(char *fi)
+char	*ft_strtrim(char const *s)
 {
-	int		fd;
-	int		r;
-	t_list	*tmp;
-	t_list	*lst;
-	char	c;
+	char	*r;
+	int		i;
+	int		l;
 
-	if (!(lst = lst_n(0)))
+	if (!s)
+		return (0);
+	while (*s == ' ' || *s == '\n' || *s == '\t')
+		s++;
+	l = ft_strlen(s);
+	while ((s[l - 1] == ' ' || s[l - 1] == '\n' || s[l - 1] == '\t') && l > 0)
+		l--;
+	if (!(r = (char *)malloc((l + 1) * sizeof(char))))
 		return (NULL);
-	tmp = lst;
-	fd = open(fi, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	while ((r = read(fd, &c, 1)) != 0)
+	i = 0;
+	while (i < l)
 	{
-		tmp->c = c;
-		if (!(lst_a(tmp, 0)))
-		{
-			lst_destroy(&lst);
-			close(fd);
-			return (NULL);
-		}
-		tmp = tmp->next;
+		r[i] = s[i];
+		i++;
 	}
-	close(fd);
-	return (lst);
+	r[i] = '\0';
+	return (r);
 }

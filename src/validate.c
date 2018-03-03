@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/01 20:51:19 by aherrera          #+#    #+#             */
+/*   Updated: 2018/03/02 19:34:19 by aherrera         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "liba.h"
 #include "minos.h"
 
-static int		count_m(t_list *lst)
+int				count_m(t_list *lst)
 {
 	int		i;
 	char	c;
@@ -15,7 +27,7 @@ static int		count_m(t_list *lst)
 		lst = lst->next;
 		i++;
 	}
-	if ((i + 1) % 21 != 0)
+	if ((i + 1) % 21 != 0 || (i + 1) / 21 > 26)
 		return (0);
 	return (i);
 }
@@ -88,7 +100,9 @@ static	int		check_m(char *mino, t_mino *tab)
 	i = 0;
 	while (i < 19 && tab[i].m(mino) == 0)
 		i++;
-	return (tab[i].m(mino));
+	if (i == 19)
+		return (0);
+	return (1);
 }
 
 char			**validate(t_list *lst)
@@ -107,13 +121,12 @@ char			**validate(t_list *lst)
 		return (NULL);
 	while (j < (i + 1) / 21)
 	{
-		if (check_m(ar[j], g_mino) == 0)
+		if (!check_m(ar[j], g_mino))
 		{
-			destroy_ar(ar, (i + 1) / 21);
+			destroy_ar(ar, j);
 			free(ar);
 			return (NULL);
 		}
-		printf("%s\n",ar[j]);
 		j++;
 	}
 	return (ar);

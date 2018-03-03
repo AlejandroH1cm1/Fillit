@@ -6,14 +6,14 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 17:08:51 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/01 17:09:07 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/02 02:52:34 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINOS_H
 # define MINOS_H
 
-t_mino				g_mino[] =
+t_mino	g_mino[] =
 {
 	{0, &mino_0},
 	{1, &mino_1},
